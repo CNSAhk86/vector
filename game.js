@@ -144,7 +144,7 @@ function moveObject() {
         }
 
         if (checkCollisionWithGoal()) {
-            handleSuccess('골인 지점에 도착했습니다!');
+            handleSuccess('이세계에서 탈출했습니다!');
             return;
         }
 
