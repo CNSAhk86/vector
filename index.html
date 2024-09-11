@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="geometry.svg">
+    <title>기하적(Geometry) 돌진(Dash)! - 시작 화면</title>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5dc;
+            font-family: 'Arial', sans-serif;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #5c4033;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        p {
+            font-size: 20px;
+            color: #7f6757;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .start-button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #d2b48c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #c19a6b;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .start-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <h1>기하적(Geometry) 돌진(Dash)!</h1>
+    <p>
+        이런, 당신은 실수로 <strong>2차원 이세계 포탈</strong>에 잘못 들어왔습니다! <br>빨리 본래의 3차원 세상으로 돌아가지 않으면
+        <br>평생 이 평면 세계에서 갇히게 될거라구요! 
+        <br><br> 하지만 충격적이게도 당신은 <strong>두 벡터선이 이루는 합력</strong>으로 <br>밖에 이동할 수 없습니다.
+        <br><br><br> <strong>당신은 과연 현실 도피에서 벗어나 무사히 <br>현실 세계로 복귀할 수 있을까요?</strong>
+    </p>
+    <button class="start-button" onclick="showInstructions()"><strong>게임 시작</strong></button>
+
+    <script>
+        function showInstructions() {
+            // SweetAlert로 게임 조작법 안내 팝업 표시
+            Swal.fire({
+                title: '2차원 세계 이동 규칙',
+                html: '1. 빙글빙글 돌아가는 파란색 선을 <br>클릭으로 각도를 지정하세요! <br><br> 2. 늘어났다 줄어드는 파란색 선 <br>클릭으로 멈춰 길이를 조절하세요! <br><br> 3. 빨간색 선도 마찬가지로 지정해서 <strong>합력으로 발사!</strong><br><br> <strong>*장애물에 닿으면 죽습니다</strong>',
+                icon: 'info',
+                confirmButtonText: '시작하기'
+            }).then(() => {
+                startGame();  // 게임 시작 함수 호출
+            });
+        }
+
+        function startGame() {
+            document.body.style.animation = 'fadeOut 1s forwards';
+            window.location.href = 'index1.html';
+        }  // 게임 화면으로 이동
+    </script>
+</body>
+</html>
