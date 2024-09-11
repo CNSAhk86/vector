@@ -27,37 +27,37 @@ const maxSpeedMultiplier = 3;
 
 // Upper maze walls
 const upperMazeWalls = [
-    { x: 300 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
-    { x: 600 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
-    { x: 900 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
-    { x: 1200 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
+    { x: 300 * scaleX, y: 400 * scaleY, width: 20 * scaleX, height: 200 * scaleY, visible: false },
+    { x: 600 * scaleX, y: 400 * scaleY, width: 20 * scaleX, height: 200 * scaleY, visible: false },
+    { x: 900 * scaleX, y: 400 * scaleY, width: 20 * scaleX, height: 200 * scaleY, visible: false },
+    { x: 1200 * scaleX, y: 400 * scaleY, width: 20 * scaleX, height: 200 * scaleY, visible: false },
 ];
 
 // Lower maze walls
 const lowerMazeWalls = [
-    { x: 150 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
-    { x: 450 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
-    { x: 750 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
-    { x: 1050 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
+    { x: 150 * scaleX, y: 600 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
+    { x: 450 * scaleX, y: 600 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
+    { x: 750 * scaleX, y: 600 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
+    { x: 1050 * scaleX, y: 600 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
 ];
 
 // Fixed maze walls
 const fixedMazeWalls = [
-    { x: 0, y: 170 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
-    { x: 200 * scaleX, y: 340 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
-    { x: 0, y: 510 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
+    { x: 0, y: 200 * scaleY, width: 1220 * scaleX, height: 20 * scaleY, visible: true },
+    { x: 200 * scaleX, y: 400 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
+    { x: 0, y: 600 * scaleY, width: 1220 * scaleX, height: 20 * scaleY, visible: true },
 
-    { x: 300 * scaleX, y: 90 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
-    { x: 600 * scaleX, y: -20 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
-    { x: 900 * scaleX, y: 90 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
+    { x: 300 * scaleX, y: 100 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
+    { x: 600 * scaleX, y: -10 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
+    { x: 900 * scaleX, y: 100 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
 
-    { x: 450 * scaleX, y: 170 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
-    { x: 750 * scaleX, y: 270 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
-    { x: 1050 * scaleX, y: 170 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
+    { x: 450 * scaleX, y: 200 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
+    { x: 750 * scaleX, y: 340 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
+    { x: 1050 * scaleX, y: 200 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
 ];
 
-const goalPos = { x: canvas.width - 1460 * scaleX, y: canvas.height - 80 * scaleY };
-const goalRadius = 35 * scaleX; // Scaled goal radius
+const goalPos = { x: canvas.width - 1300 * scaleX, y: canvas.height - 80 * scaleY };
+const goalRadius = 27 * scaleX; // Scaled goal radius
 
 let randomizingAngle1 = true;
 let randomizingLength1 = false;
