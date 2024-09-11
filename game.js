@@ -1,66 +1,57 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// 기본 노트북 해상도 (예: 1366x768)
-const baseWidth = 1366;
-const baseHeight = 768;
-
-// 현재 화면 크기 기준으로 비율 계산
-const scaleX = canvas.width / baseWidth;
-const scaleY = canvas.height / baseHeight;
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let angle1 = 0;
 let angle2 = 0;
-let vectorLength1 = 50 * scaleX; // 벡터 길이도 비율 적용
-let vectorLength2 = 50 * scaleX;
-const minVectorLength = 50 * scaleX; // 최소 벡터 길이도 비율 적용
-const lengthChangeSpeed = 150 * scaleX; // 길이 변경 속도에 비율 적용
+let vectorLength1 = 50;
+let vectorLength2 = 50;
+const minVectorLength = 50;
+const lengthChangeSpeed = 150;
 let objectMoving = false;
-let objectPos = { x: 80 * scaleX, y: 85 * scaleY }; // 초기 위치도 비율 적용
+let objectPos = { x: 80, y: 85 };
 let velocity = { x: 0, y: 0 };
 
-const objectRadius = 27 * Math.min(scaleX, scaleY); // 객체의 반지름도 화면 크기에 맞게 조정
+const objectRadius = 27;
 const bounceFactor = -0.7;
 const friction = 0.93;
 const maxSpeedMultiplier = 3;
 
-// 상단 그룹 장애물, 비율 적용
+// 상단 그룹 장애물
 const upperMazeWalls = [
-    { x: 300 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
-    { x: 600 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
-    { x: 900 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
-    { x: 1200 * scaleX, y: 350 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: false },
+    { x: 300, y: 350, width: 20, height: 170, visible: false },
+    { x: 600, y: 350, width: 20, height: 170, visible: false },
+    { x: 900, y: 350, width: 20, height: 170, visible: false },
+    { x: 1200, y: 350, width: 20, height: 170, visible: false },
 ];
 
-// 하단 그룹 장애물, 비율 적용
+// 하단 그룹 장애물
 const lowerMazeWalls = [
-    { x: 150 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
-    { x: 450 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
-    { x: 750 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
-    { x: 1050 * scaleX, y: 530 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
+    { x: 150, y: 530, width: 20, height: 170, visible: true },
+    { x: 450, y: 530, width: 20, height: 170, visible: true },
+    { x: 750, y: 530, width: 20, height: 170, visible: true },
+    { x: 1050, y: 530, width: 20, height: 170, visible: true },
 ];
 
-// 고정된 미로 장애물, 비율 적용
+// 고정된 미로 장애물
 const fixedMazeWalls = [
-    { x: 0, y: 170 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
-    { x: 200 * scaleX, y: 340 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
-    { x: 0, y: 510 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
-    
-    { x: 300 * scaleX, y: 90 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
-    { x: 600 * scaleX, y: -20 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
-    { x: 900 * scaleX, y: 90 * scaleY, width: 20 * scaleX, height: 100 * scaleY, visible: true },
+    { x: 0, y: 170, width: 1360, height: 20, visible: true },
+    { x: 200, y: 340, width: 1360, height: 20, visible: true },
+    { x: 0, y: 510, width: 1360, height: 20, visible: true },
 
-    { x: 450 * scaleX, y: 170 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
-    { x: 750 * scaleX, y: 270 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
-    { x: 1050 * scaleX, y: 170 * scaleY, width: 20 * scaleX, height: 80 * scaleY, visible: true },
+    { x: 300, y: 90, width: 20, height: 100, visible: true },
+    { x: 600, y: -20, width: 20, height: 100, visible: true },
+    { x: 900, y: 90, width: 20, height: 100, visible: true },
+
+    { x: 450, y: 170, width: 20, height: 80, visible: true },
+    { x: 750, y: 270, width: 20, height: 80, visible: true },
+    { x: 1050, y: 170, width: 20, height: 80, visible: true },
 ];
 
-// 목표 지점도 비율 적용
-const goalPos = { x: (canvas.width - 1460 * scaleX), y: canvas.height - 80 * scaleY };
-const goalRadius = 35 * Math.min(scaleX, scaleY);
+const goalPos = { x: canvas.width - 1460, y: canvas.height - 80 };
+const goalRadius = 35;
 
 let randomizingAngle1 = true;
 let randomizingLength1 = false;
