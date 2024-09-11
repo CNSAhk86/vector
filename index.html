@@ -77,27 +77,27 @@
         이런, 당신은 실수로 <strong>2차원 이세계 포탈</strong>에 잘못 들어왔습니다! <br>빨리 본래의 3차원 세상으로 돌아가지 않으면
         <br>평생 이 평면 세계에서 갇히게 될거라구요! 
         <br><br> 하지만 충격적이게도 당신은 <strong>두 벡터선이 이루는 합력</strong>으로 <br>밖에 이동할 수 없습니다.
-        <br><br><br> <strong>당신은 과연 현실 도피에서 벗어나 무사히 <br>현실 세계로 복귀할 수 있을까요?</strong>
+        <br><br> 설상가상 이차원 주민들이 <strong>미로모양 회귀 트랩을 만들어</strong><br>가는 길도 어렵게 만들었죠.
+        <br><br><br> <strong>당신은 과연 현실 도피에서 벗어나 무사히 <br>포탈로 현실 세계에 복귀할 수 있을까요?</strong>
     </p>
     <button class="start-button" onclick="showInstructions()"><strong>게임 시작</strong></button>
 
     <script>
         function showInstructions() {
-            // SweetAlert로 게임 조작법 안내 팝업 표시
             Swal.fire({
                 title: '2차원 세계 이동 규칙',
                 html: '1. 빙글빙글 돌아가는 파란색 선을 <br>클릭으로 각도를 지정하세요! <br><br> 2. 늘어났다 줄어드는 파란색 선 <br>클릭으로 멈춰 길이를 조절하세요! <br><br> 3. 빨간색 선도 마찬가지로 지정해서 <strong>합력으로 발사!</strong><br><br> <strong>*장애물에 닿으면 죽습니다</strong>',
                 icon: 'info',
                 confirmButtonText: '시작하기'
             }).then(() => {
-                startGame();  // 게임 시작 함수 호출
+                startGame();
             });
         }
 
         function startGame() {
             document.body.style.animation = 'fadeOut 1s forwards';
             window.location.href = 'index1.html';
-        }  // 게임 화면으로 이동
+        }
     </script>
 </body>
 </html>

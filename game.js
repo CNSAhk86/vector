@@ -4,7 +4,6 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Scaling factors based on a notebook screen resolution (1366x768)
 const baseWidth = 1366;
 const baseHeight = 768;
 const scaleX = canvas.width / baseWidth;
@@ -20,12 +19,11 @@ let objectMoving = false;
 let objectPos = { x: 80 * scaleX, y: 85 * scaleY };
 let velocity = { x: 0, y: 0 };
 
-const objectRadius = 27 * scaleX; // Scaled object radius
+const objectRadius = 27 * scaleX; 
 const bounceFactor = -0.7;
 const friction = 0.93;
 const maxSpeedMultiplier = 3;
 
-// Upper maze walls
 const upperMazeWalls = [
     { x: 300 * scaleX, y: 400 * scaleY, width: 20 * scaleX, height: 200 * scaleY, visible: false },
     { x: 600 * scaleX, y: 400 * scaleY, width: 20 * scaleX, height: 200 * scaleY, visible: false },
@@ -33,7 +31,6 @@ const upperMazeWalls = [
     { x: 1200 * scaleX, y: 400 * scaleY, width: 20 * scaleX, height: 200 * scaleY, visible: false },
 ];
 
-// Lower maze walls
 const lowerMazeWalls = [
     { x: 150 * scaleX, y: 600 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
     { x: 450 * scaleX, y: 600 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
@@ -41,7 +38,6 @@ const lowerMazeWalls = [
     { x: 1050 * scaleX, y: 600 * scaleY, width: 20 * scaleX, height: 170 * scaleY, visible: true },
 ];
 
-// Fixed maze walls
 const fixedMazeWalls = [
     { x: 0, y: 200 * scaleY, width: 1220 * scaleX, height: 20 * scaleY, visible: true },
     { x: 200 * scaleX, y: 400 * scaleY, width: 1360 * scaleX, height: 20 * scaleY, visible: true },
@@ -57,7 +53,7 @@ const fixedMazeWalls = [
 ];
 
 const goalPos = { x: canvas.width - 1300 * scaleX, y: canvas.height - 80 * scaleY };
-const goalRadius = 27 * scaleX; // Scaled goal radius
+const goalRadius = 27 * scaleX;
 
 let randomizingAngle1 = true;
 let randomizingLength1 = false;
@@ -144,12 +140,12 @@ function moveObject() {
         }
 
         if (checkCollisionWithMaze()) {
-            handleFailure('미로에 닿았습니다.');
+            handleFailure();
             return;
         }
 
         if (checkCollisionWithGoal()) {
-            handleSuccess('이세계에서 탈출했습니다!');
+            handleSuccess('진짜 어떻게 하신거죠..? ㄷㄷ');
             return;
         }
 
@@ -184,7 +180,7 @@ function checkCollisionWithGoal() {
 
 function handleSuccess(message) {
     Swal.fire({
-        title: '성공!',
+        title: '탈출 성공!',
         text: `${message}`,
         icon: 'success',
         confirmButtonText: '재시작'
@@ -193,16 +189,36 @@ function handleSuccess(message) {
     });
 }
 
-function handleFailure(message) {
+function handleFailure() {
+    const failureMessages = [
+        '아 이걸 죽으시네요 ㅋㅋㅋ',
+        '와... 이걸 못 피하시네...',
+        '역시 쉽지 않죠? 😏',
+        '태초마을로 가는 티켓입니다!',
+        '이게 진짜 실화인가요? 😅',
+    ];
+
+    const failureDetails = [
+        '조금만 더 노력하세요! 될진 모르겠지만 ㅋㅋ',
+        '이렇게 끝내긴 아쉽죠? 다시 도전!',
+        '이세계에서 탈출 실패... 😢',
+        '엌ㅋㅋ 태초마을 ㅋㅋㅋㅋ',
+        '한 번 더 가보시죠!',
+    ];
+
+    const randomMessage = failureMessages[Math.floor(Math.random() * failureMessages.length)];
+    const randomDetail = failureDetails[Math.floor(Math.random() * failureDetails.length)];
+
     Swal.fire({
-        title: '실패!',
-        text: `${message}`,
+        title: randomMessage,
+        text: `${randomDetail}`,
         icon: 'error',
         confirmButtonText: '다시 시도'
     }).then(() => {
         resetObjectPosition();
     });
 }
+
 
 function resetGame() {
     resetObjectPosition();
